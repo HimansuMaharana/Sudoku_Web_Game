@@ -1,0 +1,192 @@
+body {
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #1e003c, #001e3c); /* Dark blue/purple gradient */
+    background-size: 200% 200%; /* Make background larger than viewport */
+    animation: gradientAnimation 15s ease infinite; /* Apply gradient animation */
+    overflow: hidden; /* Hide potential overflow */
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%; /* Start gradient position */
+    }
+    50% {
+        background-position: 100% 50%; /* Middle gradient position */
+    }
+    100% {
+        background-position: 0% 50%; /* End gradient position (loops back to start) */
+    }
+}
+
+.game-container {
+    display: flex;
+    align-items: center; /* Align items vertically in the container */
+}
+
+.instructions {
+    margin-right: 80px; /* Space between instructions and Sudoku */
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 250px;
+    position: relative;
+    overflow: hidden;
+    color: #ff4081; /* Pink text */
+    border: 1px solid #ff4081; /* Pink border */
+}
+
+.instructions h2 {
+    color: #00bcd4; /* Cyan heading */
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 10px;
+    text-shadow: 0 0 5px #00bcd4; /* Glowing effect */
+}
+
+.instructions h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #ff4081; /* Pink underline */
+    box-shadow: 0 0 5px #ff4081; /* Glowing underline */
+}
+
+.instructions p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 20px;
+    text-shadow: 0 0 3px #ff4081; /* Subtle glowing text */
+}
+
+.instructions p::before {
+    content: '➤'; /* Arrow bullet */
+    position: absolute;
+    left: 0;
+    color: #00bcd4; /* Cyan bullet */
+    text-shadow: 0 0 3px #00bcd4;
+}
+
+.instructions p:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    transition: transform 0.3s ease;
+}
+
+.instructions::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: repeating-linear-gradient(45deg, rgba(255, 64, 129, 0.1), rgba(255, 64, 129, 0.1) 10px, transparent 10px, transparent 20px); /* Repeating pink pattern */
+    z-index: -1;
+    animation: patternAnimation 20s linear infinite; /* Apply pattern animation */
+}
+
+@keyframes gradientRotation {
+    0% {
+        background: linear-gradient(0deg, #1e003c, #001e3c); /* Start at 0deg */
+    }
+    25% {
+        background: linear-gradient(90deg, #1e003c, #001e3c); /* Rotate to 90deg */
+    }
+    50% {
+        background: linear-gradient(180deg, #1e003c, #001e3c); /* Rotate to 180deg */
+    }
+    75% {
+        background: linear-gradient(270deg, #1e003c, #001e3c); /* Rotate to 270deg */
+    }
+    100% {
+        background: linear-gradient(360deg, #1e003c, #001e3c); /* Back to 0deg (360deg) */
+    }
+}
+
+.sudoku-container {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent board */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(255, 64, 129, 0.5); /* Pink glowing shadow */
+    padding: 20px;
+    backdrop-filter: blur(8px); /* More intense blur */
+    border: 1px solid #ff4081; /* Pink border */
+    color: #00bcd4; /* Cyan text */
+    text-shadow: 0 0 5px #00bcd4; /* Glowing text */
+}
+
+.sudoku-grid {
+    display: grid;
+    grid-template-rows: repeat(9, 50px); /* 9 rows of 50px */
+    grid-template-columns: repeat(9, 50px); /* 9 columns of 50px */
+    gap: 2px;
+    border: 2px solid #00bcd4; /* Cyan border */
+}
+
+.sudoku-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ff4081; /* Pink border */
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent cell background */
+}
+
+.sudoku-cell.given {
+    background-color: rgba(0, 0, 0, 0.7); /* Given cells slightly darker */
+    color: #00bcd4; /* Cyan text */
+    cursor: default; /* Given cells are not clickable */
+}
+
+.sudoku-cell.selected {
+    background-color: rgba(255, 64, 129, 0.3); /* Selected cell pink */
+    box-shadow: 0 0 10px #ff4081; /* Glowing selected cell */
+}
+
+.sudoku-cell.error {
+    background-color: rgba(255, 0, 0, 0.3); /* Error cell red */
+    color: #ff0000;
+    text-shadow: 0 0 5px #ff0000;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #ff4081; /* Pink button border */
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark button background */
+    color: #00bcd4; /* Cyan button text */
+    cursor: pointer;
+    box-shadow: 0 0 8px #ff4081; /* Glowing button */
+}
+
+.controls button:hover {
+    background-color: rgba(255, 64, 129, 0.2);
+}
+
+.controls button:disabled {
+    background-color: rgba(100, 100, 100, 0.5);
+    border-color: rgba(100, 100, 100, 0.5);   
+    color: rgba(150, 150, 150, 0.8);
+    box-shadow: none;
+}

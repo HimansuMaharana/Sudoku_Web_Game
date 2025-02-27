@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Master</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="instructions">
+            <h2>Instructions</h2>
+            <p> Click on an empty cell to select it.</p>
+            <p> Use the number keys (1-9) to enter a number.</p>
+            <p> Use Backspace or Delete to clear a cell.</p>
+            <p> Click "Hint" to get a hint in the puzzle.</p>
+            <p> Click "Reset" to reset the puzzle.</p>
+            <p> Red cells indicate errors.</p>
+        </div>
+        <div class="sudoku-container">
+            <div class="sudoku-grid" id="sudoku-grid"></div>
+            <div class="controls">
+                <button id="solve-button">Hint</button>
+                <button id="reset-button">Reset</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
